@@ -11,19 +11,6 @@ The application combines FastAPI, Next.js, OpenAI, Financial Modeling Prep (FMP)
 Unlike generic AI chatbots, the system performs specialized analysis through multiple research agents and generates explainable BUY, WATCHLIST, or SELL recommendations supported by evidence.
 
 
-## Quick Start
-
-```bash
-docker compose up --build
-```
-
-Frontend: http://localhost:3000
-
-Backend: http://localhost:8000
-
-API Docs: http://localhost:8000/docs
-
-
 ## Key Highlights
 
 - Full-stack AI application
