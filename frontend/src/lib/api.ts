@@ -1,10 +1,5 @@
 // frontend/src/lib/api.ts
-const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
-if (!backend_url) {
-  throw new Error(
-    "Missing NEXT_PUBLIC_BACKEND_URL. Please create frontend/.env.local"
-  );
-}
+const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL || "";
 
 export interface ResearchResponse {
   company: string;
@@ -26,6 +21,10 @@ export interface ResearchResponse {
 export async function analyzeStock(
   company: string
 ): Promise<ResearchResponse> {
+  if (!backend_url) {
+    throw new Error("NEXT_PUBLIC_BACKEND_URL is not configured");
+  }
+
   const response = await fetch(
     `${backend_url}/research`,
     {
@@ -33,9 +32,7 @@ export async function analyzeStock(
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        company
-      })
+      body: JSON.stringify({ company })
     }
   );
 
