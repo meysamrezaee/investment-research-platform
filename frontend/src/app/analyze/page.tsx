@@ -1,19 +1,26 @@
 // frontend/src/app/analyze/page.tsx
+
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import {
+  Suspense,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
 import { useSearchParams } from "next/navigation";
 
 import {
   analyzeStock,
-  ResearchResponse
+  ResearchResponse,
 } from "@/lib/api";
 
 import RecommendationCard from "@/components/RecommendationCard";
 import ScoreBreakdown from "@/components/ScoreBreakdown";
 import MetricsGrid from "@/components/MetricsGrid";
 
-export default function AnalysisPage() {
+function AnalysisContent() {
   const [data, setData] =
     useState<ResearchResponse | null>(
       null
@@ -131,7 +138,9 @@ export default function AnalysisPage() {
           </h2>
 
           <p className="mt-2">
-            {data.upgrade_catalyst}
+            {
+              data.upgrade_catalyst
+            }
           </p>
         </div>
 
@@ -141,10 +150,26 @@ export default function AnalysisPage() {
           </h2>
 
           <p className="mt-2">
-            {data.downgrade_catalyst}
+            {
+              data.downgrade_catalyst
+            }
           </p>
         </div>
       </section>
     </main>
+  );
+}
+
+export default function AnalysisPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="p-10">
+          Loading...
+        </div>
+      }
+    >
+      <AnalysisContent />
+    </Suspense>
   );
 }
