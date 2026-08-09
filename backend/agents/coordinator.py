@@ -7,31 +7,12 @@ from agents.news_agent import analyze_news
 from agents.industry_agent import analyze_industry
 from agents.risk_agent import analyze_risks
 from agents.competitor_agent import analyze_competitors
-
-from agents.decision_agent import (
-    generate_recommendation
-)
-
-from services.memo_builder import (
-    build_investment_prompt
-)
-
-from services.openai_client import (
-    ask_llm
-)
-
-from services.report_storage import (
-    save_report,
-    save_decision
-)
-
-from services.market_data import (
-    get_company_data
-)
-
-from services.metrics import (
-    extract_key_metrics
-)
+from agents.decision_agent import generate_recommendation
+from services.memo_builder import build_investment_prompt
+from services.openai_client import ask_llm
+from services.report_storage import (save_report, save_decision, create_timestamp)
+from services.market_data import get_company_data
+from services.metrics import extract_key_metrics
 
 def calculate_average_score(decision):
     return (
@@ -55,7 +36,10 @@ def average_score_to_confidence(avg_score):
 
 
 async def run_research(symbol: str):
-
+    from datetime import datetime
+    async def run_research(symbol: str):
+        print(f"[{datetime.now()}] run_research called for {symbol}")
+    
     (
         financials,
         news,
@@ -79,24 +63,11 @@ async def run_research(symbol: str):
         competitors=competitors
     )
 
-    investment_memo = await asyncio.to_thread(
-        ask_llm,
-        prompt
-    )
-
-    report_path = save_report(
-        symbol,
-        investment_memo
-    )
-    
-    company_data = await asyncio.to_thread(
-    get_company_data,
-    symbol
-    )
-
-    key_metrics = extract_key_metrics(
-        company_data
-    )
+    investment_memo = await asyncio.to_thread(ask_llm, prompt)
+    timestamp = create_timestamp()
+    report_path = save_report(symbol, investment_memo, timestamp)
+    company_data = await asyncio.to_thread(get_company_data, symbol)
+    key_metrics = extract_key_metrics(company_data)
 
     decision = await generate_recommendation(
         symbol,
@@ -106,15 +77,10 @@ async def run_research(symbol: str):
         risks,
         competitors
     )
-
-    save_decision(
-        symbol,
-        decision
-    )
-
+    
     average_score = calculate_average_score(decision)
-
-    return {
+    
+    final_decision = {
         "company": symbol,
         "rating": average_score_to_rating(average_score),
         "confidence": average_score_to_confidence(average_score),
@@ -130,3 +96,7 @@ async def run_research(symbol: str):
         "downgrade_catalyst": decision["downgrade_catalyst"],
         "report_file": report_path
     }
+
+    save_decision(symbol, final_decision, timestamp)
+
+    return final_decision

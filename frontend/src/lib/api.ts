@@ -1,4 +1,4 @@
-
+// frontend/src/lib/api.ts
 const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 if (!backend_url) {
   throw new Error(

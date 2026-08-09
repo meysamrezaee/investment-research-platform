@@ -1,6 +1,8 @@
+// frontend/src/app/analyze/page.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import {
   analyzeStock,
@@ -20,23 +22,32 @@ export default function AnalysisPage() {
   const [loading, setLoading] =
     useState(true);
 
+  const searchParams =
+    useSearchParams();
+
+  const ticker =
+    searchParams.get("ticker");
+
+  const hasRun = useRef(false);
+
   useEffect(() => {
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
+    if (!ticker) {
+      setLoading(false);
+      return;
+    }
 
-    const ticker =
-      params.get("ticker");
+    if (hasRun.current) {
+      return;
+    }
 
-    if (!ticker) return;
+    hasRun.current = true;
 
     analyzeStock(ticker)
       .then(setData)
       .finally(() =>
         setLoading(false)
       );
-  }, []);
+  }, [ticker]);
 
   if (loading) {
     return (
