@@ -11,6 +11,15 @@ The application combines FastAPI, Next.js, OpenAI, Financial Modeling Prep (FMP)
 Unlike generic AI chatbots, the system performs specialized analysis through multiple research agents and generates explainable BUY, WATCHLIST, or SELL recommendations supported by evidence.
 
 
+## Live Demo
+
+Frontend:
+https://investment-frontend-649775527452.northamerica-northeast2.run.app
+
+API Documentation:
+https://investment-backend-649775527452.northamerica-northeast2.run.app/docs
+
+
 ## Key Highlights
 
 - Full-stack AI application
@@ -29,6 +38,9 @@ Unlike generic AI chatbots, the system performs specialized analysis through mul
 - Dockerized deployment
 - Docker Compose orchestration
 - Environment-based configuration
+- Google Cloud Run deployment
+- Cloud-native containerized architecture
+- CI/CD deployment from GitHub
 
 
 ## Example Output
@@ -119,6 +131,13 @@ investment-research-platform/
 │
 ├── docker-compose.yml
 └── README.md
+```
+```
+Deployment
+├── Cloud Run Frontend Service
+├── Cloud Run Backend Service
+├── Cloud Build
+└── Artifact Registry
 ```
 
 
@@ -219,12 +238,32 @@ Structured Recommendation
 | Language         | Python                                   |
 | API Layer        | FastAPI REST APIs                        |
 | Containerization | Docker, Docker Compose                   |
+| Cloud Platform   | Google Cloud Run                         |
+| CI/CD            | Cloud Build, GitHub                      |
+
+
+## Deployment
+
+The application is deployed using Google Cloud Run.
+
+### Production Architecture
+
+- Frontend deployed as a dedicated Cloud Run service
+- Backend deployed as a dedicated Cloud Run service
+- Docker-based deployments
+- GitHub integrated deployment workflow
+- Environment-based configuration using Cloud Run variables
+
+### Cloud Services
+
+- Google Cloud Run
+- Cloud Build
+- Artifact Registry
 
 
 ## Skills Demonstrated
 
-- Multi-Agent Systems
-- AI Orchestration
+- Multi-agent AI orchestration
 - Investment Research Automation
 - Financial Statement Analysis
 - Prompt Engineering
@@ -240,8 +279,9 @@ Structured Recommendation
 - Explainable AI
 - Docker
 - Docker Compose
-- Containerization
 - Environment Configuration
+- Docker containerization for local and cloud environments
+- Cloud Run serverless deployment architecture
 
 
 ## Getting Started
