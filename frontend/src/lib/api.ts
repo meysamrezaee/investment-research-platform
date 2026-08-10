@@ -1,5 +1,5 @@
 // frontend/src/lib/api.ts
-const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL || "https://investment-backend-649775527452.northamerica-northeast2.run.app";
 
 export interface ResearchResponse {
   company: string;
