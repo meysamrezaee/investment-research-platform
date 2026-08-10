@@ -26,7 +26,7 @@ https://investment-backend-649775527452.northamerica-northeast2.run.app/docs
 - Multi-agent architecture
 - Investment research automation
 - Structured BUY / WATCHLIST / SELL recommendations
-- Real-time financial data integration
+- Live financial market data integration
 - Company news analysis
 - Financial statement analysis
 - Industry analysis
@@ -43,8 +43,24 @@ https://investment-backend-649775527452.northamerica-northeast2.run.app/docs
 - CI/CD deployment from GitHub
 
 
-## Example Output
+## API
 
+### Research Endpoint
+
+```text
+POST /research
+```
+
+Example:
+
+Request:
+```json
+{
+  "company": "MSFT"
+}
+```
+
+Response:
 ```json
 {
   "company": "MSFT",
@@ -76,9 +92,10 @@ https://investment-backend-649775527452.northamerica-northeast2.run.app/docs
   ],
   "upgrade_catalyst": "AI-driven efficiency gains ...",
   "downgrade_catalyst": "Material margin compression ...",
-  "report_file": "reports\\MSFT_20260808_163540.md"
+  "report_file": "reports/MSFT_20260808_163540.md"
 }
 ```
+
 
 ## Project Structure
 ```text
@@ -200,30 +217,7 @@ Synthesizes all evidence and produces:
 
 ## System Architecture
 
-```text
-User
- │
- ▼
-FastAPI API
- │
- ▼
-Coordinator Agent
- │
- ├── Financial Agent
- ├── News Agent
- ├── Industry Agent
- ├── Competitor Agent
- └── Risk Agent
- │
- ▼
-Investment Memo Generation
- │
- ▼
-Decision Agent
- │
- ▼
-Structured Recommendation
-```
+<img src="investment_research_platform_architecture_diagram.png" alt="Investment Research Platform Architecture Diagram">
 
 
 ## Tech Stack
@@ -264,24 +258,17 @@ The application is deployed using Google Cloud Run.
 ## Skills Demonstrated
 
 - Multi-agent AI orchestration
-- Investment Research Automation
-- Financial Statement Analysis
+- Financial Research Automation
+- FastAPI & REST API Development
+- Next.js & TypeScript
+- Full-Stack Development
 - Prompt Engineering
 - LLM Application Development
-- FastAPI
-- Next.js
-- TypeScript
 - Python
-- REST APIs
-- Full-Stack Development
-- Agent-Based Architecture
-- Financial Data Integration
 - Explainable AI
-- Docker
-- Docker Compose
-- Environment Configuration
 - Docker containerization for local and cloud environments
-- Cloud Run serverless deployment architecture
+- Google Cloud Run serverless deployment architecture
+- CI/CD with Cloud Build and GitHub
 
 
 ## Getting Started
@@ -402,32 +389,10 @@ Front-end runs at:
 http://localhost:3000
 ```
 
-## Current Endpoint
-
-Research Endpoint
-```text
-POST /research
-```
-
-Example:
-```json
-{
-  "company": "MSFT"
-}
-```
-
-Response:
-```json
-{
-  "company": "MSFT",
-  "rating": "BUY",
-  "confidence": 8
-}
-```
-
 
 ## Future Enhancements
 
+- Cache FMP API call results
 - SEC filing integration
 - Historical recommendation tracking
 - Portfolio watchlists
