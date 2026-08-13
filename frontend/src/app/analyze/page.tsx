@@ -19,6 +19,7 @@ import {
 import RecommendationCard from "@/components/RecommendationCard";
 import ScoreBreakdown from "@/components/ScoreBreakdown";
 import MetricsGrid from "@/components/MetricsGrid";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 function AnalysisContent() {
   const [data, setData] =
@@ -57,11 +58,7 @@ function AnalysisContent() {
   }, [ticker]);
 
   if (loading) {
-    return (
-      <div className="p-10">
-        Loading...
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   if (!data) {
