@@ -1,6 +1,12 @@
 # backend/services/metrics.py
 
-def format_billions(value):
+def format_large_numbers(value):
+    if value < 1_000:
+        return f"${value:.2f}"
+    elif value < 1_000_000:
+        return f"${value / 1_000:.1f}K"
+    elif value < 1_000_000_000:
+        return f"${value / 1_000_000:.1f}M"
     return f"${value / 1_000_000_000:.1f}B"
 
 def extract_key_metrics(company_data):
@@ -15,11 +21,11 @@ def extract_key_metrics(company_data):
         latest_revenue = (latest_income_statement["revenue"])
         revenue_growth_percent = round(((latest_revenue - previous_revenue) / previous_revenue) * 100, 2)
     return {
-        "latest_revenue": format_billions(latest_income_statement["revenue"]),
-        "previous_revenue": format_billions(previous_income_statement["revenue"]) if previous_income_statement else None,
+        "latest_revenue": format_large_numbers(latest_income_statement["revenue"]),
+        "previous_revenue": format_large_numbers(previous_income_statement["revenue"]) if previous_income_statement else None,
         "revenue_growth_percent": revenue_growth_percent,
-        "free_cash_flow": format_billions(cash_flow["freeCashFlow"]),
-        "cash_and_short_term_investments": format_billions(balance_sheet["cashAndShortTermInvestments"]),
-        "debt": format_billions(balance_sheet["totalDebt"]),
-        "net_debt": format_billions(balance_sheet["netDebt"])
+        "free_cash_flow": format_large_numbers(cash_flow["freeCashFlow"]),
+        "cash_and_short_term_investments": format_large_numbers(balance_sheet["cashAndShortTermInvestments"]),
+        "debt": format_large_numbers(balance_sheet["totalDebt"]),
+        "net_debt": format_large_numbers(balance_sheet["netDebt"])
     }
