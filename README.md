@@ -27,6 +27,7 @@ https://investment-backend-649775527452.northamerica-northeast2.run.app/docs
 - Investment research automation
 - Structured BUY / WATCHLIST / SELL recommendations
 - Live financial market data integration
+- 24-hour in-memory FMP API caching to reduce API costs and duplicate requests
 - Company news analysis
 - Financial statement analysis
 - Industry analysis
@@ -140,6 +141,10 @@ investment-research-platform/
 │   │   ├── requests.py
 │   │   └── responses.py
 │   │
+│   ├── tests/
+│   │   ├── test_metrics.py
+│   │   └── test_market_data.py
+│   │
 │   ├── reports/
 │   ├── main.py
 │   ├── Dockerfile
@@ -159,6 +164,12 @@ Deployment
 
 
 ## Features
+
+### FMP Data Caching
+
+The backend now caches FMP responses in memory for 24 hours before refreshing them. This reduces duplicate API calls for the same symbol and endpoint, lowers API costs, and avoids unnecessary external requests during repeated analysis runs.
+
+The cache is implemented centrally in the market data service and applies across key endpoints such as profile data, income statements, balance sheets, cash flow statements, and peer data. This helps keep the research workflow fast and more cost-efficient while preserving fresh data after the 24-hour TTL expires.
 
 ### Financial Analysis Agent
 
@@ -390,9 +401,19 @@ http://localhost:3000
 ```
 
 
+## Testing
+
+The project includes backend unit tests for core financial metric logic and FMP cache behavior.
+
+Run the test suite from the root directory:
+
+```bash
+python -m pytest backend/tests
+```
+
+
 ## Future Enhancements
 
-- Cache FMP API call results
 - SEC filing integration
 - Historical recommendation tracking
 - Portfolio watchlists
