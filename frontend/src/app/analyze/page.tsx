@@ -99,7 +99,7 @@ function AnalysisContent() {
       />
 
       <section className="grid md:grid-cols-2 gap-6">
-        <div className="bg-white dark:bg-darkgraybackground shadow rounded-2xl p-6">
+        <div className="bg-green-50 dark:bg-darkgraybackground shadow rounded-2xl p-6">
           <h2 className="font-bold mb-3">
             Strengths
           </h2>
@@ -113,7 +113,7 @@ function AnalysisContent() {
           </ul>
         </div>
 
-        <div className="bg-white dark:bg-darkgraybackground shadow rounded-2xl p-6">
+        <div className="bg-red-50 dark:bg-darkgraybackground shadow rounded-2xl p-6">
           <h2 className="font-bold mb-3">
             Risks
           </h2>

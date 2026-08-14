@@ -26,7 +26,7 @@ export default function ScoreBreakdown({
 
       <div className="bg-gray-200 h-3 rounded">
         <div
-          className="bg-blue-500 h-3 rounded"
+          className="bg-indigo-500 h-3 rounded"
           style={{
             width: `${value * 10}%`
           }}
