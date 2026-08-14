@@ -28,8 +28,8 @@ export default function HomePage() {
               AI-powered investment research
             </div>
 
-            <h1 className="mx-auto max-w-full text-[clamp(2.25rem,4vw,5.25rem)] font-black leading-[0.95] tracking-[-0.04em] text-slate-950 dark:text-white">
-              Know the signal before investing.
+            <h1 className="mx-auto max-w-full text-[clamp(2.25rem,3.0vw,5.25rem)] font-black leading-[0.95] tracking-[-0.04em] text-slate-950 dark:text-white">
+              Know what matters before investing.
             </h1>
 
             <p className="mx-auto mt-5 max-w-[1100px] text-lg text-slate-600 md:text-xl dark:text-slate-300">
